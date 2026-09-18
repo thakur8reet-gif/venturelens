@@ -1,0 +1,185 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum CompanyStage {
+  PRE_SEED
+  SEED
+  SERIES_A
+  SERIES_B
+  SERIES_C
+  GROWTH
+}
+
+enum EvidenceType {
+  REPORTED
+  CALCULATED
+  ESTIMATED
+  COMPANY_CLAIM
+  UNAVAILABLE
+}
+
+enum AnalysisStatus {
+  STRONG_FIT
+  REVIEW
+  INSUFFICIENT_EVIDENCE
+  MANDATE_MISMATCH
+}
+
+model Startup {
+  id              String            @id @default(cuid())
+  slug            String            @unique
+  name            String
+  sector          String
+  geography       String
+  stage           CompanyStage
+  businessModel   String?
+  description     String?
+  website         String?
+  createdAt       DateTime          @default(now())
+  updatedAt       DateTime          @updatedAt
+  financials      FinancialPeriod[]
+  rounds          FundingRound[]
+  facts           SourceFact[]
+  analyses        Analysis[]
+  fundMatches     FundMatch[]
+  featureSnapshots FeatureSnapshot[]
+}
+
+model FinancialPeriod {
+  id               String   @id @default(cuid())
+  startupId        String
+  periodStart      DateTime
+  periodEnd        DateTime
+  revenue          Decimal? @db.Decimal(20, 4)
+  arr              Decimal? @db.Decimal(20, 4)
+  grossProfit      Decimal? @db.Decimal(20, 4)
+  ebitda           Decimal? @db.Decimal(20, 4)
+  freeCashFlow     Decimal? @db.Decimal(20, 4)
+  cash             Decimal? @db.Decimal(20, 4)
+  grossBurn        Decimal? @db.Decimal(20, 4)
+  netBurn          Decimal? @db.Decimal(20, 4)
+  cac              Decimal? @db.Decimal(20, 4)
+  ltv              Decimal? @db.Decimal(20, 4)
+  nrr              Decimal? @db.Decimal(12, 6)
+  churn            Decimal? @db.Decimal(12, 6)
+  customers        Int?
+  topCustomerShare Decimal? @db.Decimal(12, 6)
+  capex            Decimal? @db.Decimal(20, 4)
+  workingCapital   Decimal? @db.Decimal(20, 4)
+  createdAt        DateTime @default(now())
+  startup          Startup  @relation(fields: [startupId], references: [id], onDelete: Cascade)
+  sourceFactIds    Json?
+  @@index([startupId, periodEnd])
+}
+
+model FundingRound {
+  id            String   @id @default(cuid())
+  startupId     String
+  roundName     String
+  announcedAt   DateTime
+  amount        Decimal? @db.Decimal(20, 4)
+  preMoney      Decimal? @db.Decimal(20, 4)
+  postMoney     Decimal? @db.Decimal(20, 4)
+  investors     Json?
+  sourceFactIds Json?
+  startup       Startup  @relation(fields: [startupId], references: [id], onDelete: Cascade)
+  @@index([startupId, announcedAt])
+}
+
+model Fund {
+  id          String      @id @default(cuid())
+  name        String      @unique
+  description String?
+  mandate     Json
+  createdAt   DateTime    @default(now())
+  updatedAt   DateTime    @updatedAt
+  matches     FundMatch[]
+  analyses    Analysis[]
+}
+
+model Source {
+  id          String       @id @default(cuid())
+  name        String
+  uri         String?
+  sourceType  String
+  publishedAt DateTime?
+  retrievedAt DateTime     @default(now())
+  facts       SourceFact[]
+  documents   Document[]
+}
+
+model SourceFact {
+  id          String       @id @default(cuid())
+  startupId   String
+  sourceId    String
+  field       String
+  value       Json
+  evidence    EvidenceType
+  confidence  Float
+  periodStart DateTime?
+  periodEnd   DateTime?
+  source      Source       @relation(fields: [sourceId], references: [id], onDelete: Cascade)
+  startup     Startup      @relation(fields: [startupId], references: [id], onDelete: Cascade)
+  @@index([startupId, field])
+}
+
+model FeatureSnapshot {
+  id          String   @id @default(cuid())
+  startupId   String
+  featureSet  String
+  calculatedAt DateTime @default(now())
+  features    Json
+  provenance  Json
+  startup     Startup @relation(fields: [startupId], references: [id], onDelete: Cascade)
+  @@index([startupId, calculatedAt])
+}
+
+model Analysis {
+  id                 String         @id @default(cuid())
+  startupId          String
+  fundId             String?
+  featureSetVersion  String
+  modelVersion       String
+  status             AnalysisStatus
+  dimensions         Json
+  positives          Json
+  concerns           Json
+  missingEvidence   Json
+  diligenceQuestions Json
+  createdAt          DateTime       @default(now())
+  startup            Startup        @relation(fields: [startupId], references: [id], onDelete: Cascade)
+  fund               Fund?          @relation(fields: [fundId], references: [id])
+  @@index([startupId, createdAt])
+}
+
+model FundMatch {
+  id         String   @id @default(cuid())
+  startupId  String
+  fundId     String
+  fitScore   Float
+  reasons    Json
+  blockers   Json
+  createdAt  DateTime @default(now())
+  startup    Startup  @relation(fields: [startupId], references: [id], onDelete: Cascade)
+  fund       Fund     @relation(fields: [fundId], references: [id], onDelete: Cascade)
+  @@unique([startupId, fundId])
+}
+
+model Document {
+  id          String   @id @default(cuid())
+  sourceId    String
+  startupId   String?
+  title       String
+  uri         String?
+  contentHash String
+  extractedAt DateTime?
+  metadata    Json?
+  source      Source   @relation(fields: [sourceId], references: [id], onDelete: Cascade)
+  @@index([startupId])
+}
