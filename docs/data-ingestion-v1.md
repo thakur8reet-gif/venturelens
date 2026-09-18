@@ -52,6 +52,10 @@ Each ingestion creates a Source record and a SourceFact containing the provider 
 
 The current implementation keeps the raw company-facts payload in PostgreSQL to stay at zero infrastructure cost. Object storage can be introduced later without changing the canonical model.
 
+## Local setup
+
+After configuring PostgreSQL, run `npm run db:push` to apply the current Prisma schema without requiring a paid database or migration service.
+
 ## Limitations
 
 SEC covers public filers, not the private startup universe. The first pass is annual, not quarterly. The initial adapter does not infer ARR, CAC, LTV, NRR, valuation, or other private-company metrics. Financial methodology must be validated further before live investment use.
