@@ -12,6 +12,9 @@ The SEC states that its EDGAR data APIs provide company submissions and extracte
 
 ## Flow
 
+Live API / analyst preview
+    -> GET /api/sec/companies
+
 Vercel Cron
     -> GET /api/jobs/ingest/sec
     -> SEC company directory
@@ -24,6 +27,8 @@ Vercel Cron
        -> SourceFact
        -> IngestionJob
     -> feature engine (next integration step)
+
+The `/api/sec/companies` route exposes the same live SEC adapter without requiring PostgreSQL. This is useful for validating the provider connection in the deployed application before enabling persistence.
 
 ## Security
 
