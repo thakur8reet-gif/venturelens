@@ -58,12 +58,16 @@ Missing values remain unknown. They are never converted to zero.
 
 Every persisted analysis records a feature-set version and model version. This enables methodology changes without silently rewriting historical analyses.
 
+## Real data
+
+Phase 8 adds a zero-cost SEC EDGAR ingestion path. The ingestion job is server-side, stores source provenance, and persists annual public-company financial facts. Synthetic demo data remains separate from ingested market data.
+
 ## Production roadmap
 
 1. Connect licensed/public company and funding data providers.
 2. Add authentication and role-based access.
 3. Add production PostgreSQL repositories to the API layer.
-4. Add background ingestion jobs, retries, rate limits, and observability.
+4. Expand ingestion with durable jobs, retries, rate limits, and provider monitoring.
 5. Add comparable-company and market-data services.
 6. Add document ingestion, retrieval, and citation-backed research.
 7. Add scenario analysis and portfolio workflows where supported by evidence.
