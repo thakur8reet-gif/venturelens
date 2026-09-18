@@ -7,7 +7,7 @@ Defined the product boundary, explainability requirement, Vercel/Next.js directi
 Locked the v1 feature families, formulas, evidence states, applicability and missing-data policy.
 
 ## Phase 2 — Domain and data model
-Implemented canonical TypeScript domain contracts and a PostgreSQL/Prisma schema for startups, financial periods, funding rounds, funds, sources, facts, feature snapshots, analyses, matches and documents.
+Implemented canonical TypeScript domain contracts and a PostgreSQL/Prisma schema for startups, financial periods, funding rounds, funds, sources, facts, feature snapshots, analyses, matches, documents and ingestion jobs.
 
 ## Phase 3 — Financial engine
 Implemented deterministic feature calculations and dimension-level explainable screening with fund mandate matching.
@@ -24,6 +24,9 @@ Implemented evidence contracts, diligence-pack generation and an investment-revi
 ## Phase 7 — Production hardening
 Added CI, security/contribution guidance, release process, local PostgreSQL container, Prisma seed, methodology handover and long-term project reference.
 
+## Phase 8 — Zero-cost real data foundation
+Added the first real external data connector using SEC EDGAR XBRL Company Facts, server-side ingestion, source preservation, financial-period persistence, ingestion-job tracking, a protected ingestion endpoint, and Vercel Cron configuration.
+
 ## What V1 intentionally does not pretend to have
 
-Real external market/funding data, authenticated multi-user access, production provider credentials, background workers, and a full document RAG system are integration work that must be added with legitimate data sources and deployment infrastructure. The interfaces are designed so those systems can be added without rewriting the deterministic financial engine.
+Real private-market startup/funding coverage, authenticated multi-user access, commercial provider credentials, durable queue workers, and a full document RAG system remain future integration work. The provider boundary is deliberately preserved so licensed private-market data can be added without rewriting the financial engine.
