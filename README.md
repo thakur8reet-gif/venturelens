@@ -1,5 +1,7 @@
 # VentureLens
 
+**Live deployment:** https://venturelens-tau.vercel.app/
+
 Explainable venture capital investment intelligence platform.
 
 VentureLens is a production-oriented foundation for VC deal sourcing, startup analysis, fund matching, diligence, and investment-memo workflows.
