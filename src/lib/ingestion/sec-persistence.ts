@@ -1,9 +1,17 @@
+import type { FinancialPeriod } from "../domain";
 import type { SecCompany } from "./sec";
 import { prisma } from "../db";
 
 function toDate(value: string) {
   return new Date(`${value}T00:00:00.000Z`);
 }
+
+const metricFields: Array<keyof FinancialPeriod> = [
+  "revenue",
+  "grossProfit",
+  "cash",
+  "freeCashFlow",
+];
 
 export async function persistSecCompanies(companies: SecCompany[]) {
   let startups = 0;
@@ -40,10 +48,44 @@ export async function persistSecCompanies(companies: SecCompany[]) {
       },
     });
 
+    const rawFact = await prisma.sourceFact.create({
+      data: {
+        startupId: startup.id,
+        sourceId: source.id,
+        field: "sec_companyfacts",
+        value: company.facts[0]?.payload as object,
+        evidence: "REPORTED",
+        confidence: 1,
+      },
+    });
+    facts++;
+
     for (const period of company.financials) {
       const periodEnd = toDate(period.periodEnd);
       const periodStart = new Date(periodEnd);
       periodStart.setUTCFullYear(periodEnd.getUTCFullYear() - 1);
+
+      const periodFactIds: string[] = [rawFact.id];
+
+      for (const field of metricFields) {
+        const value = period[field];
+        if (typeof value !== "number" || !Number.isFinite(value)) continue;
+
+        const metricFact = await prisma.sourceFact.create({
+          data: {
+            startupId: startup.id,
+            sourceId: source.id,
+            field: `financialPeriod.${String(field)}`,
+            value,
+            evidence: "REPORTED",
+            confidence: 1,
+            periodStart,
+            periodEnd,
+          },
+        });
+        periodFactIds.push(metricFact.id);
+        facts++;
+      }
 
       await prisma.financialPeriod.upsert({
         where: { id: `sec-${company.cik}-${company.ticker}-${period.periodEnd}` },
@@ -53,6 +95,7 @@ export async function persistSecCompanies(companies: SecCompany[]) {
           cash: period.cash,
           ebitda: period.ebitda,
           freeCashFlow: period.freeCashFlow,
+          sourceFactIds: periodFactIds,
         },
         create: {
           id: `sec-${company.cik}-${company.ticker}-${period.periodEnd}`,
@@ -64,23 +107,11 @@ export async function persistSecCompanies(companies: SecCompany[]) {
           cash: period.cash,
           ebitda: period.ebitda,
           freeCashFlow: period.freeCashFlow,
+          sourceFactIds: periodFactIds,
         },
       });
       periods++;
     }
-
-    const payload = company.facts[0]?.payload;
-    await prisma.sourceFact.create({
-      data: {
-        startupId: startup.id,
-        sourceId: source.id,
-        field: "sec_companyfacts",
-        value: payload as object,
-        evidence: "REPORTED",
-        confidence: 1,
-      },
-    });
-    facts++;
   }
 
   return { startups, periods, facts };
