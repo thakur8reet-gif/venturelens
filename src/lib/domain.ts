@@ -31,6 +31,8 @@ export interface Startup {
   stage: Stage;
   businessModel?: string;
   description?: string;
+  dataSource?: "synthetic_demo" | "sec_xbrl" | "other";
+  sourceNote?: string;
   financials: FinancialPeriod[];
   latestRound?: FundingRound;
 }
