@@ -30,12 +30,13 @@ export default async function StartupPage({ params }: { params: Promise<{ slug: 
         <div className="provenance"><strong>Data basis:</strong> {startup.sourceNote}</div>
         <div className="table-wrap">
           <table>
-            <thead><tr><th>Period end</th><th>Revenue</th><th>ARR</th><th>Gross profit</th><th>Cash</th><th>Free cash flow</th></tr></thead>
+            <thead><tr><th>Period end</th><th>Revenue</th><th>ARR</th><th>Gross profit</th><th>Capex</th><th>Cash</th><th>Free cash flow</th></tr></thead>
             <tbody>{startup.financials.map(p => <tr key={p.periodEnd}>
               <td>{p.periodEnd}</td>
               <td>{formatCurrency(p.revenue)}</td>
               <td>{formatCurrency(p.arr)}</td>
               <td>{formatCurrency(p.grossProfit)}</td>
+              <td>{formatCurrency(p.capex)}</td>
               <td>{formatCurrency(p.cash)}</td>
               <td>{formatCurrency(p.freeCashFlow)}</td>
             </tr>)}</tbody>
@@ -49,6 +50,7 @@ export default async function StartupPage({ params }: { params: Promise<{ slug: 
         <div className="input-list">
           <div><span>Revenue</span><b>{formatCurrency(latest?.revenue)}</b></div>
           <div><span>Gross profit</span><b>{formatCurrency(latest?.grossProfit)}</b></div>
+          <div><span>Capex</span><b>{formatCurrency(latest?.capex)}</b></div>
           <div><span>Cash</span><b>{formatCurrency(latest?.cash)}</b></div>
           <div><span>Free cash flow</span><b>{formatCurrency(latest?.freeCashFlow)}</b></div>
         </div>
