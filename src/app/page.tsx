@@ -59,6 +59,7 @@ export default async function Home() {
             <div className="sec-metrics">
               <span>Revenue <b>{formatCurrency(latest?.revenue)}</b></span>
               <span>Gross profit <b>{formatCurrency(latest?.grossProfit)}</b></span>
+              <span>Capex <b>{formatCurrency(latest?.capex)}</b></span>
               <span>Cash <b>{formatCurrency(latest?.cash)}</b></span>
               <span>FCF <b>{formatCurrency(latest?.freeCashFlow)}</b></span>
               <span>FY end <b>{latest?.periodEnd ?? "—"}</b></span>
