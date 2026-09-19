@@ -59,7 +59,7 @@ export default async function StartupPage({ params }: { params: Promise<{ slug: 
       <div className="card">
         <h2>How VentureLens derives metrics</h2>
         <div className="feature-list">{latestFeatures.map(([name, feature]) => <div className="feature-row" key={name}>
-          <div><strong>{pretty(name)}</strong><div className="muted">{feature.evidence === "calculated" ? feature.formula : feature.reason ?? "Reported input"}</div></div>
+          <div><strong>{pretty(name)}</strong><div className="muted">{feature.evidence === "calculated" ? `${feature.formula}${feature.inputs?.length ? ` · Inputs: ${feature.inputs.join(", ")}` : ""}` : feature.reason ?? "Reported input"}</div></div>
           <b>{formatFeature(feature.value, feature.unit)}</b>
         </div>)}</div>
       </div>
