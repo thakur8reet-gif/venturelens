@@ -138,7 +138,9 @@ export function companyToStartup(company: SecCompany): Startup {
     sector: "PUBLIC_COMPANY",
     geography: "United States",
     stage: "GROWTH",
-    description: `SEC reporting company ${company.ticker}`,
+    description: `SEC reporting company ${company.ticker}. Financial values are sourced from SEC EDGAR XBRL company facts.`,
+    dataSource: "sec_xbrl",
+    sourceNote: "Reported financial statement facts from SEC EDGAR XBRL; derived metrics are calculated separately by VentureLens and are not presented as reported figures.",
     financials: company.financials,
   };
 }
