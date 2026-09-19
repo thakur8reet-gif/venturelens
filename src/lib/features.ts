@@ -51,7 +51,9 @@ export function buildFeatures(startup: Startup): FeatureSet {
     : unavailable("multiple", "Need positive CAC and LTV");
 
   f.cac_payback_months = latest.cac !== undefined && latest.grossProfit !== undefined && latest.revenue && latest.revenue > 0
-    ? calc(latest.cac / (latest.grossProfit / 12), "months", "cac / monthly_gross_profit_per_customer", ["cac", "gross_profit"])
+    ? latest.customers && latest.customers > 0
+      ? calc(latest.cac / ((latest.grossProfit / latest.customers) / 12), "months", "cac / monthly_gross_profit_per_customer", ["cac", "gross_profit", "customers"])
+      : unavailable("months", "Need CAC, gross profit, and customer count to derive a per-customer payback period")
     : unavailable("months", "Need CAC and gross profit");
 
   f.runway_months = latest.cash !== undefined && latest.netBurn !== undefined && latest.netBurn > 0
@@ -62,7 +64,7 @@ export function buildFeatures(startup: Startup): FeatureSet {
     ? (() => {
         const netNewArr = latest.arr - previous.arr;
         return netNewArr > 0
-          ? calc(latest.netBurn / netNewArr, "multiple", "net_burn / net_new_arr", ["net_burn", "arr"])
+          ? calc((latest.netBurn * 12) / netNewArr, "multiple", "(monthly_net_burn * 12) / net_new_arr", ["net_burn", "arr"])
           : unavailable("multiple", "Net new ARR is not positive");
       })()
     : unavailable("multiple", "Need current/prior ARR and net burn");
