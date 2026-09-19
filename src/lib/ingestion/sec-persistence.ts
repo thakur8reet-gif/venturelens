@@ -9,6 +9,7 @@ function toDate(value: string) {
 const metricFields: Array<keyof FinancialPeriod> = [
   "revenue",
   "grossProfit",
+  "capex",
   "cash",
   "freeCashFlow",
 ];
@@ -66,8 +67,8 @@ export async function persistSecCompanies(companies: SecCompany[]) {
 
     for (const period of company.financials) {
       const periodEnd = toDate(period.periodEnd);
-      const periodStart = new Date(periodEnd);
-      periodStart.setUTCFullYear(periodEnd.getUTCFullYear() - 1);
+      const periodStart = period.periodStart ? toDate(period.periodStart) : new Date(periodEnd);
+      if (!period.periodStart) periodStart.setUTCFullYear(periodEnd.getUTCFullYear() - 1);
 
       const periodFactIds: string[] = [rawFact.id];
 
@@ -96,6 +97,7 @@ export async function persistSecCompanies(companies: SecCompany[]) {
         update: {
           revenue: period.revenue,
           grossProfit: period.grossProfit,
+          capex: period.capex,
           cash: period.cash,
           ebitda: period.ebitda,
           freeCashFlow: period.freeCashFlow,
