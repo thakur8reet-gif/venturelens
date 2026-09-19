@@ -30,6 +30,14 @@ export function buildFeatures(startup: Startup): FeatureSet {
     ? calc(latest.arr / previous.arr - 1, "ratio", "(arr_t / arr_t-1) - 1", ["arr"])
     : unavailable("ratio", "Need two comparable ARR periods");
 
+  f.revenue_cagr_2y = latest.revenue !== undefined && previous?.revenue && previous.revenue > 0
+    ? calc(Math.pow(latest.revenue / previous.revenue, 1 / 1) - 1, "ratio", "(revenue_t / revenue_t-1)^(1/1) - 1", ["revenue"])
+    : unavailable("ratio", "Need two comparable annual revenue periods for 2Y CAGR");
+
+  f.arr_cagr_2y = latest.arr !== undefined && previous?.arr && previous.arr > 0
+    ? calc(Math.pow(latest.arr / previous.arr, 1 / 1) - 1, "ratio", "(arr_t / arr_t-1)^(1/1) - 1", ["arr"])
+    : unavailable("ratio", "Need two comparable annual ARR periods for 2Y CAGR");
+
   f.revenue_cagr_3y = latest.revenue !== undefined && threeYearsAgo?.revenue && threeYearsAgo.revenue > 0
     ? calc(Math.pow(latest.revenue / threeYearsAgo.revenue, 1 / 3) - 1, "ratio", "(revenue_t / revenue_t-3)^(1/3) - 1", ["revenue"])
     : unavailable("ratio", "Need four annual/comparable periods for 3Y CAGR");
