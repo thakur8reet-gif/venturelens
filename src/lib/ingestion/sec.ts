@@ -53,8 +53,7 @@ function factsForTags(company: SecCompanyFacts, tags: string[], duration: boolea
     if (!units) continue;
     facts.push(...units.filter(f =>
       f.form === "10-K" &&
-      f.fp === "FY" &&
-      (duration ? Boolean(f.start) && Boolean(f.end) : Boolean(f.end) && !Boolean(f.start))
+      (duration ? f.fp === "FY" && Boolean(f.start) && Boolean(f.end) : Boolean(f.end) && !Boolean(f.start))
     ));
   }
   return facts;
@@ -107,6 +106,7 @@ function buildFinancials(company: SecCompanyFacts): FinancialPeriod[] {
       ...(periodStart ? { periodStart } : {}),
       revenue: revenueFact?.val,
       grossProfit: durationMaps.grossProfit.get(end)?.val,
+      capex: capex,
       cash: instantMaps.cash.get(end)?.val,
       freeCashFlow:
         operatingCashFlow !== undefined && capex !== undefined
