@@ -14,7 +14,7 @@ export function buildFeatures(startup: Startup): FeatureSet {
   const periods = [...startup.financials].sort((a, b) => a.periodEnd.localeCompare(b.periodEnd));
   const latest = periods.at(-1);
   const previous = periods.at(-2);
-  const older = periods.at(-4);
+  const threeYearsAgo = periods.length >= 4 ? periods.at(-4) : undefined;
   const f: FeatureSet = {};
 
   if (!latest) return f;
@@ -30,8 +30,8 @@ export function buildFeatures(startup: Startup): FeatureSet {
     ? calc(latest.arr / previous.arr - 1, "ratio", "(arr_t / arr_t-1) - 1", ["arr"])
     : unavailable("ratio", "Need two comparable ARR periods");
 
-  f.revenue_cagr_3y = latest.revenue !== undefined && older?.revenue && older.revenue > 0
-    ? calc(Math.pow(latest.revenue / older.revenue, 1 / 3) - 1, "ratio", "(revenue_t / revenue_t-3)^(1/3) - 1", ["revenue"])
+  f.revenue_cagr_3y = latest.revenue !== undefined && threeYearsAgo?.revenue && threeYearsAgo.revenue > 0
+    ? calc(Math.pow(latest.revenue / threeYearsAgo.revenue, 1 / 3) - 1, "ratio", "(revenue_t / revenue_t-3)^(1/3) - 1", ["revenue"])
     : unavailable("ratio", "Need four annual/comparable periods for 3Y CAGR");
 
   f.gross_margin = latest.grossProfit !== undefined && latest.revenue && latest.revenue > 0
