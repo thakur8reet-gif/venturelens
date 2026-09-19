@@ -46,12 +46,16 @@ async function secJson<T>(url: string): Promise<T> {
   return response.json() as Promise<T>;
 }
 
-function annualFacts(company: SecCompanyFacts, tags: string[]) {
+function factsForTags(company: SecCompanyFacts, tags: string[], duration: boolean) {
   const facts: SecFact[] = [];
   for (const tag of tags) {
     const units = company.facts["us-gaap"]?.[tag]?.units?.USD;
     if (!units) continue;
-    facts.push(...units.filter(f => f.form === "10-K" && f.fp === "FY" && Boolean(f.start) && Boolean(f.end)));
+    facts.push(...units.filter(f =>
+      f.form === "10-K" &&
+      f.fp === "FY" &&
+      (duration ? Boolean(f.start) && Boolean(f.end) : Boolean(f.end) && !Boolean(f.start))
+    ));
   }
   return facts;
 }
@@ -71,30 +75,39 @@ function valueAt(map: Map<string, SecFact>, end: string) {
 }
 
 function buildFinancials(company: SecCompanyFacts): FinancialPeriod[] {
-  const tagGroups = {
+  const durationTags = {
     revenue: ["RevenueFromContractWithCustomerExcludingAssessedTax", "Revenues", "SalesRevenueNet"],
     grossProfit: ["GrossProfit"],
-    cash: ["CashAndCashEquivalentsAtCarryingValue", "CashCashEquivalentsRestrictedCashAndRestrictedCashEquivalents"],
     operatingCashFlow: ["NetCashProvidedByUsedInOperatingActivities"],
     capex: ["PaymentsToAcquirePropertyPlantAndEquipment"],
   };
+  const instantTags = {
+    cash: ["CashAndCashEquivalentsAtCarryingValue", "CashCashEquivalentsRestrictedCashAndRestrictedCashEquivalents"],
+  };
 
-  const maps = Object.fromEntries(
-    Object.entries(tagGroups).map(([key, tags]) => [key, latestByEnd(annualFacts(company, tags))]),
+  const durationMaps = Object.fromEntries(
+    Object.entries(durationTags).map(([key, tags]) => [key, latestByEnd(factsForTags(company, tags, true))]),
+  ) as Record<string, Map<string, SecFact>>;
+  const instantMaps = Object.fromEntries(
+    Object.entries(instantTags).map(([key, tags]) => [key, latestByEnd(factsForTags(company, tags, false))]),
   ) as Record<string, Map<string, SecFact>>;
 
   const ends = new Set<string>();
-  for (const map of Object.values(maps)) for (const end of map.keys()) ends.add(end);
+  for (const map of Object.values(durationMaps)) for (const end of map.keys()) ends.add(end);
+  for (const map of Object.values(instantMaps)) for (const end of map.keys()) ends.add(end);
 
   return [...ends].sort().slice(-8).map(end => {
-    const revenue = valueAt(maps.revenue, end);
-    const operatingCashFlow = valueAt(maps.operatingCashFlow, end);
-    const capex = valueAt(maps.capex, end);
+    const revenueFact = durationMaps.revenue.get(end);
+    const operatingCashFlow = durationMaps.operatingCashFlow.get(end)?.val;
+    const capex = durationMaps.capex.get(end)?.val;
+    const periodStart = revenueFact?.start ?? durationMaps.operatingCashFlow.get(end)?.start;
+
     return {
       periodEnd: end,
-      revenue,
-      grossProfit: valueAt(maps.grossProfit, end),
-      cash: valueAt(maps.cash, end),
+      ...(periodStart ? { periodStart } : {}),
+      revenue: revenueFact?.val,
+      grossProfit: durationMaps.grossProfit.get(end)?.val,
+      cash: instantMaps.cash.get(end)?.val,
       freeCashFlow:
         operatingCashFlow !== undefined && capex !== undefined
           ? operatingCashFlow - capex
