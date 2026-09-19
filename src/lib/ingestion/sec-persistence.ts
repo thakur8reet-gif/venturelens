@@ -99,6 +99,7 @@ export async function persistSecCompanies(companies: SecCompany[]) {
           grossProfit: period.grossProfit,
           capex: period.capex,
           cash: period.cash,
+          capex: period.capex,
           ebitda: period.ebitda,
           freeCashFlow: period.freeCashFlow,
           sourceFactIds: periodFactIds,
