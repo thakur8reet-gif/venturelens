@@ -20,7 +20,6 @@ export interface FinancialPeriod {
   churn?: number;
   customers?: number;
   topCustomerShare?: number;
-  capex?: number;
   workingCapital?: number;
 }
 
