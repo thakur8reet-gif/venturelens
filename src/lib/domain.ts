@@ -3,12 +3,14 @@ export type Stage = "PRE_SEED" | "SEED" | "SERIES_A" | "SERIES_B" | "SERIES_C" |
 export type EvidenceType = "reported" | "calculated" | "estimated" | "company_claim" | "unavailable";
 
 export interface FinancialPeriod {
+  periodStart?: string;
   periodEnd: string;
   revenue?: number;
   arr?: number;
   grossProfit?: number;
   ebitda?: number;
   freeCashFlow?: number;
+  capex?: number;
   cash?: number;
   grossBurn?: number;
   netBurn?: number;
