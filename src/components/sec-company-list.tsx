@@ -5,7 +5,7 @@ import { useMemo, useState } from "react";
 import type { SecCompany } from "@/lib/ingestion/sec";
 
 const recentTickers = new Set([
-  "CRWV", "CRCL", "FIG", "RBRK", "HNGE", "OMDA", "KRMN", "SAIL", "FIGR",
+  "SPCX", "BTGO", "CRWV", "CRCL", "FIG", "RBRK", "HNGE", "OMDA", "KRMN", "SAIL", "FIGR",
 ]);
 
 export function SecCompanyList({ companies }: { companies: SecCompany[] }) {
