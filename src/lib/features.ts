@@ -10,14 +10,38 @@ const calc = (value: number | null, unit: string, formula: string, inputs: strin
 
 const latestTwo = (periods: FinancialPeriod[]) => [...periods].sort((a, b) => b.periodEnd.localeCompare(a.periodEnd)).slice(0, 2);
 
+const emptyFeatures = (): FeatureSet => ({
+  revenue: unavailable("currency", "Revenue unavailable"),
+  arr: unavailable("currency", "ARR unavailable"),
+  revenue_growth: unavailable("ratio", "Need comparable revenue periods"),
+  arr_growth: unavailable("ratio", "Need comparable ARR periods"),
+  revenue_cagr_2y: unavailable("ratio", "Need three comparable annual revenue periods for 2Y CAGR"),
+  arr_cagr_2y: unavailable("ratio", "Need three comparable annual ARR periods for 2Y CAGR"),
+  revenue_cagr_3y: unavailable("ratio", "Need four annual/comparable periods for 3Y CAGR"),
+  gross_margin: unavailable("ratio", "Need gross profit and revenue"),
+  ebitda_margin: unavailable("ratio", "Need EBITDA and revenue"),
+  fcf_margin: unavailable("ratio", "Need free cash flow and revenue"),
+  ltv_cac: unavailable("multiple", "Need positive CAC and LTV"),
+  cac_payback_months: unavailable("months", "Need CAC, gross profit, and customer count"),
+  runway_months: unavailable("months", "Need cash and positive monthly net burn"),
+  burn_multiple: unavailable("multiple", "Need current/prior ARR and net burn"),
+  arr_capital_efficiency: unavailable("multiple", "Need ARR and a positive financing amount"),
+  nrr: unavailable("ratio", "NRR unavailable"),
+  churn: unavailable("ratio", "Churn unavailable"),
+  top_customer_share: unavailable("ratio", "Customer concentration unavailable"),
+  arr_multiple: unavailable("multiple", "Need post-money valuation and ARR"),
+  dilution: unavailable("ratio", "Need financing amount and post-money valuation"),
+});
+
 export function buildFeatures(startup: Startup): FeatureSet {
   const periods = [...startup.financials].sort((a, b) => a.periodEnd.localeCompare(b.periodEnd));
   const latest = periods.at(-1);
   const previous = periods.at(-2);
+  const twoYearsAgo = periods.length >= 3 ? periods.at(-3) : undefined;
   const threeYearsAgo = periods.length >= 4 ? periods.at(-4) : undefined;
   const f: FeatureSet = {};
 
-  if (!latest) return f;
+  if (!latest) return emptyFeatures();
 
   f.revenue = latest.revenue !== undefined ? { value: latest.revenue, unit: "currency", evidence: "reported" } : unavailable("currency", "Revenue unavailable");
   f.arr = latest.arr !== undefined ? { value: latest.arr, unit: "currency", evidence: "reported" } : unavailable("currency", "ARR unavailable");
@@ -30,13 +54,13 @@ export function buildFeatures(startup: Startup): FeatureSet {
     ? calc(latest.arr / previous.arr - 1, "ratio", "(arr_t / arr_t-1) - 1", ["arr"])
     : unavailable("ratio", "Need two comparable ARR periods");
 
-  f.revenue_cagr_2y = latest.revenue !== undefined && previous?.revenue && previous.revenue > 0
-    ? calc(Math.pow(latest.revenue / previous.revenue, 1 / 1) - 1, "ratio", "(revenue_t / revenue_t-1)^(1/1) - 1", ["revenue"])
-    : unavailable("ratio", "Need two comparable annual revenue periods for 2Y CAGR");
+  f.revenue_cagr_2y = latest.revenue !== undefined && twoYearsAgo?.revenue && twoYearsAgo.revenue > 0
+    ? calc(Math.pow(latest.revenue / twoYearsAgo.revenue, 1 / 2) - 1, "ratio", "(revenue_t / revenue_t-2)^(1/2) - 1", ["revenue"])
+    : unavailable("ratio", "Need three comparable annual revenue periods for 2Y CAGR");
 
-  f.arr_cagr_2y = latest.arr !== undefined && previous?.arr && previous.arr > 0
-    ? calc(Math.pow(latest.arr / previous.arr, 1 / 1) - 1, "ratio", "(arr_t / arr_t-1)^(1/1) - 1", ["arr"])
-    : unavailable("ratio", "Need two comparable annual ARR periods for 2Y CAGR");
+  f.arr_cagr_2y = latest.arr !== undefined && twoYearsAgo?.arr && twoYearsAgo.arr > 0
+    ? calc(Math.pow(latest.arr / twoYearsAgo.arr, 1 / 2) - 1, "ratio", "(arr_t / arr_t-2)^(1/2) - 1", ["arr"])
+    : unavailable("ratio", "Need three comparable annual ARR periods for 2Y CAGR");
 
   f.revenue_cagr_3y = latest.revenue !== undefined && threeYearsAgo?.revenue && threeYearsAgo.revenue > 0
     ? calc(Math.pow(latest.revenue / threeYearsAgo.revenue, 1 / 3) - 1, "ratio", "(revenue_t / revenue_t-3)^(1/3) - 1", ["revenue"])
