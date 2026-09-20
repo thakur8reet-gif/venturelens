@@ -58,7 +58,6 @@ export default async function Home() {
         <p className="muted">Search the SEC universe by ticker or company name. Recent public-company additions are included alongside the core large-cap set. Click any company for its expanded financial intelligence view.</p>
         {secError ? <div className="notice">{secError}</div> : <SecCompanyList companies={secCompanies}/>}
       </div>
-      </div>
     </section>
   </main>;
 }
