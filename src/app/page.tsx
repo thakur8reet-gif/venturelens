@@ -2,6 +2,7 @@ import { demoFund, demoStartups } from "@/lib/demo-data";
 import { analyzeStartup } from "@/lib/analysis";
 import { StartupCard } from "@/components/startup-card";
 import { discoverSecCompanies } from "@/lib/ingestion/sec";
+import { SecCompanyList } from "@/components/sec-company-list";
 
 export const dynamic = "force-dynamic";
 
@@ -12,10 +13,13 @@ export default async function Home() {
   let secCompanies: Awaited<ReturnType<typeof discoverSecCompanies>> = [];
   let secError: string | null = null;
   try {
-    const tickers = (process.env.SEC_TICKERS ?? "AAPL,MSFT,NVDA")
+    const configuredTickers = (process.env.SEC_TICKERS ?? "")
       .split(",")
       .map(value => value.trim().toUpperCase())
       .filter(Boolean);
+    const recentPublicCompanies = ["CRWV", "CRCL", "FIG", "RBRK", "HNGE", "OMDA", "KRMN", "SAIL", "FIGR"];
+    const baseTickers = configuredTickers.length ? configuredTickers : ["AAPL", "MSFT", "NVDA"];
+    const tickers = [...new Set([...baseTickers, ...recentPublicCompanies])].slice(0, 18);
     secCompanies = await discoverSecCompanies(tickers);
   } catch (error) {
     secError = error instanceof Error ? error.message : "SEC data unavailable";
@@ -51,21 +55,9 @@ export default async function Home() {
 
       <div className="card wide">
         <h2>Live SEC financials</h2>
-        <p className="muted">Source: SEC EDGAR XBRL company facts. Reported accounting values are shown as reported; VentureLens-derived ratios are calculated separately.</p>
-        {secError ? <div className="notice">{secError}</div> : secCompanies.map(company => {
-          const latest = company.financials.at(-1);
-          return <div className="sec-row" key={company.cik}>
-            <div><strong>{company.ticker}</strong><div className="muted">{company.name}</div></div>
-            <div className="sec-metrics">
-              <span>Revenue <b>{formatCurrency(latest?.revenue)}</b></span>
-              <span>Gross profit <b>{formatCurrency(latest?.grossProfit)}</b></span>
-              <span>Capex <b>{formatCurrency(latest?.capex)}</b></span>
-              <span>Cash <b>{formatCurrency(latest?.cash)}</b></span>
-              <span>FCF <b>{formatCurrency(latest?.freeCashFlow)}</b></span>
-              <span>FY end <b>{latest?.periodEnd ?? "—"}</b></span>
-            </div>
-          </div>;
-        })}
+        <p className="muted">Search the SEC universe by ticker or company name. Recent public-company additions are included alongside the core large-cap set. Click any company for its expanded financial intelligence view.</p>
+        {secError ? <div className="notice">{secError}</div> : <SecCompanyList companies={secCompanies}/>}
+      </div>
       </div>
     </section>
   </main>;
