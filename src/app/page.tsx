@@ -17,7 +17,7 @@ export default async function Home() {
       .split(",")
       .map(value => value.trim().toUpperCase())
       .filter(Boolean);
-    const recentPublicCompanies = ["CRWV", "CRCL", "FIG", "RBRK", "HNGE", "OMDA", "KRMN", "SAIL", "FIGR"];
+    const recentPublicCompanies = ["SPCX", "BTGO", "CRWV", "CRCL", "FIG", "RBRK", "HNGE", "OMDA", "KRMN", "SAIL", "FIGR"];
     const baseTickers = configuredTickers.length ? configuredTickers : ["AAPL", "MSFT", "NVDA"];
     const tickers = [...new Set([...baseTickers, ...recentPublicCompanies])].slice(0, 18);
     secCompanies = await discoverSecCompanies(tickers);
