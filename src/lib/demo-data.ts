@@ -97,4 +97,20 @@ export const demoStartups: Startup[] = [
       { periodEnd: "2026-01-25", revenue: 215_938_000_000, grossProfit: 153_463_000_000 },
     ],
   },
+  {
+    id: "amazon",
+    slug: "amazon",
+    name: "Amazon.com, Inc. (AMZN)",
+    sector: "E-commerce & Cloud",
+    geography: "United States",
+    stage: "GROWTH",
+    businessModel: "E-commerce, cloud computing and digital services",
+    description: "SEC-reporting public company; financial periods use reported annual net sales.",
+    dataSource: "sec_xbrl",
+    sourceNote: "SEC Form 10-K reported figures; fiscal years ended December 31, 2024 and December 31, 2025. Revenue values are USD millions. CIK 0001018724.",
+    financials: [
+      { periodEnd: "2024-12-31", revenue: 637_959_000_000 },
+      { periodEnd: "2025-12-31", revenue: 716_924_000_000 },
+    ],
+  },
 ];
