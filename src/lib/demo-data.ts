@@ -49,4 +49,20 @@ export const demoStartups: Startup[] = [
     ],
     latestRound: { roundName: "Seed", announcedAt: "2026-05-20", amount: 5_000_000, preMoney: 15_000_000, postMoney: 20_000_000 },
   },
+  {
+    id: "apple-inc",
+    slug: "apple-inc",
+    name: "Apple Inc. (AAPL)",
+    sector: "Technology",
+    geography: "United States",
+    stage: "GROWTH",
+    businessModel: "Consumer hardware, software and services",
+    description: "SEC-reporting public company; financial periods use reported annual net sales.",
+    dataSource: "sec_xbrl",
+    sourceNote: "SEC Form 10-K reported figures; fiscal years ended September 28, 2024 and September 27, 2025. Revenue values are USD millions. CIK 0000320193.",
+    financials: [
+      { periodEnd: "2024-09-28", revenue: 391_035_000_000 },
+      { periodEnd: "2025-09-27", revenue: 416_161_000_000 },
+    ],
+  },
 ];
