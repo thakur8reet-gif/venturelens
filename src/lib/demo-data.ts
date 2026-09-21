@@ -113,4 +113,20 @@ export const demoStartups: Startup[] = [
       { periodEnd: "2025-12-31", revenue: 716_924_000_000 },
     ],
   },
+  {
+    id: "alphabet",
+    slug: "alphabet",
+    name: "Alphabet Inc. (GOOGL)",
+    sector: "Internet & AI",
+    geography: "United States",
+    stage: "GROWTH",
+    businessModel: "Internet services, advertising, cloud and AI",
+    description: "SEC-reporting public company; financial periods use reported annual revenues.",
+    dataSource: "sec_xbrl",
+    sourceNote: "SEC Form 10-K reported figures; years ended December 31, 2024 and December 31, 2025. Revenue values are USD millions. CIK 0001652044.",
+    financials: [
+      { periodEnd: "2024-12-31", revenue: 350_018_000_000 },
+      { periodEnd: "2025-12-31", revenue: 402_836_000_000 },
+    ],
+  },
 ];
