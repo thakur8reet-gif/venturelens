@@ -81,4 +81,20 @@ export const demoStartups: Startup[] = [
       { periodEnd: "2025-06-30", revenue: 281_724_000_000 },
     ],
   },
+  {
+    id: "nvidia",
+    slug: "nvidia",
+    name: "NVIDIA Corporation (NVDA)",
+    sector: "Semiconductors & AI",
+    geography: "United States",
+    stage: "GROWTH",
+    businessModel: "Accelerated computing and AI semiconductors",
+    description: "SEC-reporting public company; financial periods use reported annual revenue and gross profit.",
+    dataSource: "sec_xbrl",
+    sourceNote: "SEC Form 10-K reported figures; fiscal years ended January 26, 2025 and January 25, 2026. Revenue and gross profit values are USD millions. CIK 0001045810.",
+    financials: [
+      { periodEnd: "2025-01-26", revenue: 130_497_000_000, grossProfit: 97_858_000_000 },
+      { periodEnd: "2026-01-25", revenue: 215_938_000_000, grossProfit: 153_463_000_000 },
+    ],
+  },
 ];
