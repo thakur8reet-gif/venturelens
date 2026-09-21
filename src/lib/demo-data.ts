@@ -145,4 +145,20 @@ export const demoStartups: Startup[] = [
       { periodEnd: "2025-12-31", revenue: 200_966_000_000, grossProfit: 164_791_000_000 },
     ],
   },
+  {
+    id: "tesla",
+    slug: "tesla",
+    name: "Tesla, Inc. (TSLA)",
+    sector: "Electric Vehicles & Energy",
+    geography: "United States",
+    stage: "GROWTH",
+    businessModel: "Electric vehicles, energy generation and storage",
+    description: "SEC-reporting public company; financial periods use reported annual revenue and gross profit.",
+    dataSource: "sec_xbrl",
+    sourceNote: "SEC Form 10-K reported figures; years ended December 31, 2024 and December 31, 2025. Revenue and gross profit values are USD millions. CIK 0001318605.",
+    financials: [
+      { periodEnd: "2024-12-31", revenue: 97_690_000_000, grossProfit: 17_450_000_000 },
+      { periodEnd: "2025-12-31", revenue: 94_827_000_000, grossProfit: 17_094_000_000 },
+    ],
+  },
 ];
