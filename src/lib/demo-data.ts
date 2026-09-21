@@ -193,4 +193,20 @@ export const demoStartups: Startup[] = [
       { periodEnd: "2026-01-31", revenue: 41_525_000_000, grossProfit: 32_255_000_000 },
     ],
   },
+  {
+    id: "uber",
+    slug: "uber",
+    name: "Uber Technologies, Inc. (UBER)",
+    sector: "Mobility & Delivery",
+    geography: "United States",
+    stage: "GROWTH",
+    businessModel: "Mobility, delivery and platform services",
+    description: "SEC-reporting public company; financial periods use reported annual revenue.",
+    dataSource: "sec_xbrl",
+    sourceNote: "SEC Form 10-K reported figures; years ended December 31, 2024 and December 31, 2025. Revenue values are USD millions. CIK 0001543151.",
+    financials: [
+      { periodEnd: "2024-12-31", revenue: 43_978_000_000 },
+      { periodEnd: "2025-12-31", revenue: 52_017_000_000 },
+    ],
+  },
 ];
