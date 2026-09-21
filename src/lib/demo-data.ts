@@ -177,4 +177,20 @@ export const demoStartups: Startup[] = [
       { periodEnd: "2025-11-28", revenue: 23_769_000_000, grossProfit: 21_218_000_000 },
     ],
   },
+  {
+    id: "salesforce",
+    slug: "salesforce",
+    name: "Salesforce, Inc. (CRM)",
+    sector: "Enterprise Software",
+    geography: "United States",
+    stage: "GROWTH",
+    businessModel: "Customer relationship management and enterprise cloud software",
+    description: "SEC-reporting public company; financial periods use reported annual revenue and gross profit.",
+    dataSource: "sec_xbrl",
+    sourceNote: "SEC Form 10-K reported figures; fiscal years ended January 31, 2025 and January 31, 2026. Revenue and gross profit values are USD millions. CIK 0001108524.",
+    financials: [
+      { periodEnd: "2025-01-31", revenue: 37_895_000_000, grossProfit: 29_252_000_000 },
+      { periodEnd: "2026-01-31", revenue: 41_525_000_000, grossProfit: 32_255_000_000 },
+    ],
+  },
 ];
