@@ -65,6 +65,12 @@ async function main() {
     create: { slug: "novagrid-ai", name: "NovaGrid AI", sector: "AI", geography: "India", stage: CompanyStage.SEED, businessModel: "B2B SaaS", description: "Synthetic demo company focused on AI workflow automation." }
   });
 
+  const startup3 = await prisma.startup.upsert({
+    where: { slug: "orbitpay" },
+    update: {},
+    create: { slug: "orbitpay", name: "OrbitPay", sector: "Fintech", geography: "India", stage: CompanyStage.SERIES_A, businessModel: "B2B SaaS", description: "Synthetic demo company for embedded payments." }
+  });
+
   console.log(`Seeded ${startup.name} and ${fund.name}`);
 }
 
