@@ -59,6 +59,12 @@ async function main() {
     }
   });
 
+  const startup2 = await prisma.startup.upsert({
+    where: { slug: "novagrid-ai" },
+    update: {},
+    create: { slug: "novagrid-ai", name: "NovaGrid AI", sector: "AI", geography: "India", stage: CompanyStage.SEED, businessModel: "B2B SaaS", description: "Synthetic demo company focused on AI workflow automation." }
+  });
+
   console.log(`Seeded ${startup.name} and ${fund.name}`);
 }
 
