@@ -65,4 +65,20 @@ export const demoStartups: Startup[] = [
       { periodEnd: "2025-09-27", revenue: 416_161_000_000 },
     ],
   },
+  {
+    id: "microsoft",
+    slug: "microsoft",
+    name: "Microsoft Corporation (MSFT)",
+    sector: "Software",
+    geography: "United States",
+    stage: "GROWTH",
+    businessModel: "Enterprise software, cloud and services",
+    description: "SEC-reporting public company; financial periods use reported annual revenue.",
+    dataSource: "sec_xbrl",
+    sourceNote: "SEC Form 10-K reported figures; fiscal years ended June 30, 2024 and June 30, 2025. Revenue values are USD millions. CIK 0000789019.",
+    financials: [
+      { periodEnd: "2024-06-30", revenue: 245_122_000_000 },
+      { periodEnd: "2025-06-30", revenue: 281_724_000_000 },
+    ],
+  },
 ];
