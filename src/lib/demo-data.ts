@@ -161,4 +161,20 @@ export const demoStartups: Startup[] = [
       { periodEnd: "2025-12-31", revenue: 94_827_000_000, grossProfit: 17_094_000_000 },
     ],
   },
+  {
+    id: "adobe",
+    slug: "adobe",
+    name: "Adobe Inc. (ADBE)",
+    sector: "Software",
+    geography: "United States",
+    stage: "GROWTH",
+    businessModel: "Creative, document and digital experience software",
+    description: "SEC-reporting public company; financial periods use reported annual revenue and gross profit.",
+    dataSource: "sec_xbrl",
+    sourceNote: "SEC Form 10-K reported figures; fiscal years ended November 29, 2024 and November 28, 2025. Revenue and gross profit values are USD millions. CIK 0000796343.",
+    financials: [
+      { periodEnd: "2024-11-29", revenue: 21_505_000_000, grossProfit: 19_147_000_000 },
+      { periodEnd: "2025-11-28", revenue: 23_769_000_000, grossProfit: 21_218_000_000 },
+    ],
+  },
 ];
