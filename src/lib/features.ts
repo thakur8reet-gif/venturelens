@@ -8,7 +8,7 @@ const calc = (value: number | null, unit: string, formula: string, inputs: strin
   value, unit, evidence: "calculated" as const, formula, inputs
 });
 
-const latestTwo = (periods: FinancialPeriod[]) => [...periods].sort((a, b) => b.periodEnd.localeCompare(a.periodEnd)).slice(0, 2);
+const sortPeriodsAscending = (periods: FinancialPeriod[]) => [...periods].sort((a, b) => a.periodEnd.localeCompare(b.periodEnd));\n\nconst latestTwo = (periods: FinancialPeriod[]) => sortPeriodsAscending(periods).slice(-2).reverse();
 
 const emptyFeatures = (): FeatureSet => ({
   revenue: unavailable("currency", "Revenue unavailable"),
