@@ -46,7 +46,7 @@ export function buildFeatures(startup: Startup): FeatureSet {
   f.revenue = latest.revenue !== undefined ? { value: latest.revenue, unit: "currency", evidence: "reported" } : unavailable("currency", "Revenue unavailable");
   f.arr = latest.arr !== undefined ? { value: latest.arr, unit: "currency", evidence: "reported" } : unavailable("currency", "ARR unavailable");
 
-  f.revenue_growth = latest.revenue !== undefined && previous?.revenue && previous.revenue > 0
+  f.revenue_growth = latest.revenue !== undefined && isPositive(previous?.revenue)
     ? calc(latest.revenue / previous.revenue - 1, "ratio", "(revenue_t / revenue_t-1) - 1", ["revenue"])
     : unavailable("ratio", "Need two comparable revenue periods");
 
