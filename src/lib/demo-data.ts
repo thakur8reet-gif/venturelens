@@ -241,4 +241,20 @@ export const demoStartups: Startup[] = [
       { periodEnd: "2025-09-30", revenue: 40000000000 },
     ],
   },
+  {
+    id: "netflix",
+    slug: "netflix",
+    name: "Netflix, Inc. (NFLX)",
+    sector: "Streaming & Entertainment",
+    geography: "United States",
+    stage: "GROWTH",
+    businessModel: "Subscription streaming and advertising",
+    description: "SEC-reporting public company; financial periods use reported annual revenue.",
+    dataSource: "sec_xbrl",
+    sourceNote: "SEC Form 10-K reported figures; years ended December 31, 2024 and December 31, 2025. Revenue values are USD thousands in the filing and represented as full USD amounts here. CIK 0001065280.",
+    financials: [
+      { periodEnd: "2024-12-31", revenue: 39000966000 },
+      { periodEnd: "2025-12-31", revenue: 45183036000 },
+    ],
+  },
 ];
