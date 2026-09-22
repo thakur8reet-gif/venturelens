@@ -209,4 +209,20 @@ export const demoStartups: Startup[] = [
       { periodEnd: "2025-12-31", revenue: 52_017_000_000 },
     ],
   },
+  {
+    id: "broadcom",
+    slug: "broadcom",
+    name: "Broadcom Inc. (AVGO)",
+    sector: "Semiconductors & Infrastructure Software",
+    geography: "United States",
+    stage: "GROWTH",
+    businessModel: "Semiconductors and infrastructure software",
+    description: "SEC-reporting public company; financial periods use reported annual revenue.",
+    dataSource: "sec_xbrl",
+    sourceNote: "SEC Form 10-K reported figures; fiscal years ended November 3, 2024 and November 2, 2025. Revenue values are USD millions. CIK 0001730168.",
+    financials: [
+      { periodEnd: "2024-11-03", revenue: 51574000000 },
+      { periodEnd: "2025-11-02", revenue: 63887000000 },
+    ],
+  },
 ];
