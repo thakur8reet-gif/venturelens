@@ -34,7 +34,7 @@ const emptyFeatures = (): FeatureSet => ({
 });
 
 export function buildFeatures(startup: Startup): FeatureSet {
-  const periods = [...startup.financials].sort((a, b) => a.periodEnd.localeCompare(b.periodEnd));
+  const periods = sortPeriodsAscending(startup.financials);
   const latest = periods.at(-1);
   const previous = periods.at(-2);
   const twoYearsAgo = periods.length >= 3 ? periods.at(-3) : undefined;
