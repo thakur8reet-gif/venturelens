@@ -88,7 +88,7 @@ export function buildFeatures(startup: Startup): FeatureSet {
       : unavailable("months", "Need CAC, gross profit, and customer count to derive a per-customer payback period")
     : unavailable("months", "Need CAC and gross profit");
 
-  f.runway_months = latest.cash !== undefined && latest.netBurn !== undefined && latest.netBurn > 0
+  f.runway_months = latest.cash !== undefined && isPositive(latest.netBurn)
     ? calc(latest.cash / latest.netBurn, "months", "cash / monthly_net_burn", ["cash", "net_burn"])
     : unavailable("months", "Need cash and positive monthly net burn");
 
