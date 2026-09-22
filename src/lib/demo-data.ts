@@ -273,4 +273,20 @@ export const demoStartups: Startup[] = [
       { periodEnd: "2026-05-31", revenue: 67357000000 },
     ],
   },
+  {
+    id: "walmart",
+    slug: "walmart",
+    name: "Walmart Inc. (WMT)",
+    sector: "Retail",
+    geography: "United States",
+    stage: "GROWTH",
+    businessModel: "Omnichannel retail, membership and commerce services",
+    description: "SEC-reporting public company; financial periods use reported annual revenue.",
+    dataSource: "sec_xbrl",
+    sourceNote: "SEC Form 10-K reported figures; fiscal years ended January 31, 2025 and January 31, 2026. Revenue values are USD millions. CIK 0000104169.",
+    financials: [
+      { periodEnd: "2025-01-31", revenue: 680985000000 },
+      { periodEnd: "2026-01-31", revenue: 713163000000 },
+    ],
+  },
 ];
