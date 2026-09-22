@@ -8,7 +8,7 @@ const calc = (value: number | null, unit: string, formula: string, inputs: strin
   value, unit, evidence: "calculated" as const, formula, inputs
 });
 
-const sortPeriodsAscending = (periods: FinancialPeriod[]) => [...periods].sort((a, b) => a.periodEnd.localeCompare(b.periodEnd));\n\nconst latestTwo = (periods: FinancialPeriod[]) => sortPeriodsAscending(periods).slice(-2).reverse();
+const isPositive = (value: number | undefined): value is number => value !== undefined && value > 0;\n\nconst sortPeriodsAscending = (periods: FinancialPeriod[]) => [...periods].sort((a, b) => a.periodEnd.localeCompare(b.periodEnd));\n\nconst latestTwo = (periods: FinancialPeriod[]) => sortPeriodsAscending(periods).slice(-2).reverse();
 
 const emptyFeatures = (): FeatureSet => ({
   revenue: unavailable("currency", "Revenue unavailable"),
