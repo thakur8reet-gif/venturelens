@@ -225,4 +225,20 @@ export const demoStartups: Startup[] = [
       { periodEnd: "2025-11-02", revenue: 63887000000 },
     ],
   },
+  {
+    id: "visa",
+    slug: "visa",
+    name: "Visa Inc. (V)",
+    sector: "Payments",
+    geography: "United States",
+    stage: "GROWTH",
+    businessModel: "Global digital payments network",
+    description: "SEC-reporting public company; financial periods use reported annual revenue.",
+    dataSource: "sec_xbrl",
+    sourceNote: "SEC Form 10-K reported figures; fiscal years ended September 30, 2024 and September 30, 2025. Revenue values are USD millions. CIK 0001403161.",
+    financials: [
+      { periodEnd: "2024-09-30", revenue: 35926000000 },
+      { periodEnd: "2025-09-30", revenue: 40000000000 },
+    ],
+  },
 ];
