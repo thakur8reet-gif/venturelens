@@ -257,4 +257,20 @@ export const demoStartups: Startup[] = [
       { periodEnd: "2025-12-31", revenue: 45183036000 },
     ],
   },
+  {
+    id: "oracle",
+    slug: "oracle",
+    name: "Oracle Corporation (ORCL)",
+    sector: "Enterprise Software & Cloud",
+    geography: "United States",
+    stage: "GROWTH",
+    businessModel: "Cloud infrastructure, database and enterprise software",
+    description: "SEC-reporting public company; financial periods use reported annual revenue.",
+    dataSource: "sec_xbrl",
+    sourceNote: "SEC Form 10-K reported figures; fiscal years ended May 31, 2025 and May 31, 2026. Revenue values are USD millions. CIK 0001341439.",
+    financials: [
+      { periodEnd: "2025-05-31", revenue: 57399000000 },
+      { periodEnd: "2026-05-31", revenue: 67357000000 },
+    ],
+  },
 ];
