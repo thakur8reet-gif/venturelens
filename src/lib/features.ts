@@ -50,7 +50,7 @@ export function buildFeatures(startup: Startup): FeatureSet {
     ? calc(latest.revenue / previous.revenue - 1, "ratio", "(revenue_t / revenue_t-1) - 1", ["revenue"])
     : unavailable("ratio", "Need two comparable revenue periods");
 
-  f.arr_growth = latest.arr !== undefined && previous?.arr && previous.arr > 0
+  f.arr_growth = latest.arr !== undefined && isPositive(previous?.arr)
     ? calc(latest.arr / previous.arr - 1, "ratio", "(arr_t / arr_t-1) - 1", ["arr"])
     : unavailable("ratio", "Need two comparable ARR periods");
 
