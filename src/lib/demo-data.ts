@@ -289,4 +289,20 @@ export const demoStartups: Startup[] = [
       { periodEnd: "2026-01-31", revenue: 713163000000 },
     ],
   },
+  {
+    id: "costco",
+    slug: "costco",
+    name: "Costco Wholesale Corporation (COST)",
+    sector: "Retail",
+    geography: "United States",
+    stage: "GROWTH",
+    businessModel: "Membership warehouse retail",
+    description: "SEC-reporting public company; financial periods use reported annual revenue.",
+    dataSource: "sec_xbrl",
+    sourceNote: "SEC Form 10-K reported figures; 52 weeks ended September 1, 2024 and August 31, 2025. Revenue values are USD millions. CIK 0000909832.",
+    financials: [
+      { periodEnd: "2024-09-01", revenue: 254453000000 },
+      { periodEnd: "2025-08-31", revenue: 275235000000 },
+    ],
+  },
 ];
