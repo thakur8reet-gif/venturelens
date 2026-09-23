@@ -304,5 +304,21 @@ export const demoStartups: Startup[] = [
       { periodEnd: "2024-09-01", revenue: 254453000000 },
       { periodEnd: "2025-08-31", revenue: 275235000000 },
     ],
+  },,
+  {
+    id: "cisco-systems",
+    slug: "cisco-systems",
+    name: "Cisco Systems, Inc. (CSCO)",
+    sector: "Networking & Cybersecurity",
+    geography: "United States",
+    stage: "GROWTH",
+    businessModel: "Networking, security and enterprise software",
+    description: "SEC-reporting public company; financial periods use reported annual revenue.",
+    dataSource: "sec_xbrl",
+    sourceNote: "SEC Form 10-K reported figures; fiscal years ended July 26, 2025 and July 27, 2024. Revenue values are USD millions. CIK 0000858877.",
+    financials: [
+      { periodEnd: "2024-07-27", revenue: 53803000000 },
+      { periodEnd: "2025-07-26", revenue: 56654000000 },
+    ],
   },
 ];
