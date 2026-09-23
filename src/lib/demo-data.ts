@@ -432,5 +432,21 @@ export const demoStartups: Startup[] = [
       { periodEnd: "2024-12-28", revenue: 91854000000 },
       { periodEnd: "2025-12-27", revenue: 93925000000 },
     ],
+  },,
+  {
+    id: "home-depot",
+    slug: "home-depot",
+    name: "The Home Depot, Inc. (HD)",
+    sector: "Home Improvement Retail",
+    geography: "United States",
+    stage: "GROWTH",
+    businessModel: "Home improvement retail and services",
+    description: "SEC-reporting public company; financial periods use reported annual net sales.",
+    dataSource: "sec_xbrl",
+    sourceNote: "SEC Form 10-K reported figures; fiscal years ended February 1, 2026 and February 2, 2025. Revenue values are USD millions. CIK 0000354950.",
+    financials: [
+      { periodEnd: "2025-02-02", revenue: 159514000000 },
+      { periodEnd: "2026-02-01", revenue: 164683000000 },
+    ],
   },
 ];
