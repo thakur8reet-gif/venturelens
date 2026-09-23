@@ -352,5 +352,21 @@ export const demoStartups: Startup[] = [
       { periodEnd: "2024-09-29", revenue: 38962000000 },
       { periodEnd: "2025-09-28", revenue: 44284000000 },
     ],
+  },,
+  {
+    id: "amd",
+    slug: "amd",
+    name: "Advanced Micro Devices, Inc. (AMD)",
+    sector: "Semiconductors & AI",
+    geography: "United States",
+    stage: "GROWTH",
+    businessModel: "CPUs, GPUs, adaptive computing and data-center semiconductors",
+    description: "SEC-reporting public company; financial periods use reported annual net revenue.",
+    dataSource: "sec_xbrl",
+    sourceNote: "SEC Form 10-K reported figures; fiscal years ended December 27, 2025 and December 28, 2024. Revenue values are USD millions. CIK 0000002488.",
+    financials: [
+      { periodEnd: "2024-12-28", revenue: 25785000000 },
+      { periodEnd: "2025-12-27", revenue: 34639000000 },
+    ],
   },
 ];
