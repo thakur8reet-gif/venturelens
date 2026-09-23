@@ -320,5 +320,21 @@ export const demoStartups: Startup[] = [
       { periodEnd: "2024-07-27", revenue: 53803000000 },
       { periodEnd: "2025-07-26", revenue: 56654000000 },
     ],
+  },,
+  {
+    id: "ibm",
+    slug: "ibm",
+    name: "International Business Machines Corporation (IBM)",
+    sector: "Enterprise Technology",
+    geography: "United States",
+    stage: "GROWTH",
+    businessModel: "Hybrid cloud, AI, software and consulting",
+    description: "SEC-reporting public company; financial periods use reported annual revenue.",
+    dataSource: "sec_xbrl",
+    sourceNote: "SEC Form 10-K reported figures; years ended December 31, 2025 and December 31, 2024. Revenue values are USD millions. CIK 0000051143.",
+    financials: [
+      { periodEnd: "2024-12-31", revenue: 62753000000 },
+      { periodEnd: "2025-12-31", revenue: 67535000000 },
+    ],
   },
 ];
