@@ -400,5 +400,21 @@ export const demoStartups: Startup[] = [
       { periodEnd: "2024-12-31", revenue: 177556000000 },
       { periodEnd: "2025-12-31", revenue: 182447000000 },
     ],
+  },,
+  {
+    id: "coca-cola",
+    slug: "coca-cola",
+    name: "The Coca-Cola Company (KO)",
+    sector: "Beverages",
+    geography: "United States",
+    stage: "GROWTH",
+    businessModel: "Beverage brands and consumer products",
+    description: "SEC-reporting public company; financial periods use reported annual net operating revenue.",
+    dataSource: "sec_xbrl",
+    sourceNote: "SEC Form 10-K reported figures; years ended December 31, 2025 and December 31, 2024. Revenue values are USD millions. CIK 0000021344.",
+    financials: [
+      { periodEnd: "2024-12-31", revenue: 47061000000 },
+      { periodEnd: "2025-12-31", revenue: 47941000000 },
+    ],
   },
 ];
