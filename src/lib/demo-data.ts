@@ -416,5 +416,21 @@ export const demoStartups: Startup[] = [
       { periodEnd: "2024-12-31", revenue: 47061000000 },
       { periodEnd: "2025-12-31", revenue: 47941000000 },
     ],
+  },,
+  {
+    id: "pepsico",
+    slug: "pepsico",
+    name: "PepsiCo, Inc. (PEP)",
+    sector: "Food & Beverage",
+    geography: "United States",
+    stage: "GROWTH",
+    businessModel: "Convenient foods and beverages",
+    description: "SEC-reporting public company; financial periods use reported annual net revenue.",
+    dataSource: "sec_xbrl",
+    sourceNote: "SEC Form 10-K reported figures; fiscal years ended December 27, 2025 and December 28, 2024. Revenue values are USD millions. CIK 0000077476.",
+    financials: [
+      { periodEnd: "2024-12-28", revenue: 91854000000 },
+      { periodEnd: "2025-12-27", revenue: 93925000000 },
+    ],
   },
 ];
