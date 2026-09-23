@@ -304,7 +304,7 @@ export const demoStartups: Startup[] = [
       { periodEnd: "2024-09-01", revenue: 254453000000 },
       { periodEnd: "2025-08-31", revenue: 275235000000 },
     ],
-  },,
+  },
   {
     id: "cisco-systems",
     slug: "cisco-systems",
@@ -320,7 +320,7 @@ export const demoStartups: Startup[] = [
       { periodEnd: "2024-07-27", revenue: 53803000000 },
       { periodEnd: "2025-07-26", revenue: 56654000000 },
     ],
-  },,
+  },
   {
     id: "ibm",
     slug: "ibm",
@@ -336,7 +336,7 @@ export const demoStartups: Startup[] = [
       { periodEnd: "2024-12-31", revenue: 62753000000 },
       { periodEnd: "2025-12-31", revenue: 67535000000 },
     ],
-  },,
+  },
   {
     id: "qualcomm",
     slug: "qualcomm",
@@ -352,7 +352,7 @@ export const demoStartups: Startup[] = [
       { periodEnd: "2024-09-29", revenue: 38962000000 },
       { periodEnd: "2025-09-28", revenue: 44284000000 },
     ],
-  },,
+  },
   {
     id: "amd",
     slug: "amd",
@@ -368,7 +368,7 @@ export const demoStartups: Startup[] = [
       { periodEnd: "2024-12-28", revenue: 25785000000 },
       { periodEnd: "2025-12-27", revenue: 34639000000 },
     ],
-  },,
+  },
   {
     id: "mastercard",
     slug: "mastercard",
@@ -384,7 +384,7 @@ export const demoStartups: Startup[] = [
       { periodEnd: "2024-12-31", revenue: 28167000000 },
       { periodEnd: "2025-12-31", revenue: 32791000000 },
     ],
-  },,
+  },
   {
     id: "jpmorgan-chase",
     slug: "jpmorgan-chase",
@@ -400,7 +400,7 @@ export const demoStartups: Startup[] = [
       { periodEnd: "2024-12-31", revenue: 177556000000 },
       { periodEnd: "2025-12-31", revenue: 182447000000 },
     ],
-  },,
+  },
   {
     id: "coca-cola",
     slug: "coca-cola",
@@ -416,7 +416,7 @@ export const demoStartups: Startup[] = [
       { periodEnd: "2024-12-31", revenue: 47061000000 },
       { periodEnd: "2025-12-31", revenue: 47941000000 },
     ],
-  },,
+  },
   {
     id: "pepsico",
     slug: "pepsico",
@@ -432,7 +432,7 @@ export const demoStartups: Startup[] = [
       { periodEnd: "2024-12-28", revenue: 91854000000 },
       { periodEnd: "2025-12-27", revenue: 93925000000 },
     ],
-  },,
+  },
   {
     id: "home-depot",
     slug: "home-depot",
