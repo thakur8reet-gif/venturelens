@@ -336,5 +336,21 @@ export const demoStartups: Startup[] = [
       { periodEnd: "2024-12-31", revenue: 62753000000 },
       { periodEnd: "2025-12-31", revenue: 67535000000 },
     ],
+  },,
+  {
+    id: "qualcomm",
+    slug: "qualcomm",
+    name: "QUALCOMM Incorporated (QCOM)",
+    sector: "Semiconductors & Wireless",
+    geography: "United States",
+    stage: "GROWTH",
+    businessModel: "Wireless semiconductors and technology licensing",
+    description: "SEC-reporting public company; financial periods use reported annual revenue.",
+    dataSource: "sec_xbrl",
+    sourceNote: "SEC Form 10-K reported figures; fiscal years ended September 28, 2025 and September 29, 2024. Revenue values are USD millions. CIK 0000804328.",
+    financials: [
+      { periodEnd: "2024-09-29", revenue: 38962000000 },
+      { periodEnd: "2025-09-28", revenue: 44284000000 },
+    ],
   },
 ];
