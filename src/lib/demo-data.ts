@@ -368,5 +368,21 @@ export const demoStartups: Startup[] = [
       { periodEnd: "2024-12-28", revenue: 25785000000 },
       { periodEnd: "2025-12-27", revenue: 34639000000 },
     ],
+  },,
+  {
+    id: "mastercard",
+    slug: "mastercard",
+    name: "Mastercard Incorporated (MA)",
+    sector: "Payments",
+    geography: "United States",
+    stage: "GROWTH",
+    businessModel: "Global payments network and financial technology",
+    description: "SEC-reporting public company; financial periods use reported annual net revenue.",
+    dataSource: "sec_xbrl",
+    sourceNote: "SEC Form 10-K reported figures; years ended December 31, 2025 and December 31, 2024. Revenue values are USD millions. CIK 0001141391.",
+    financials: [
+      { periodEnd: "2024-12-31", revenue: 28167000000 },
+      { periodEnd: "2025-12-31", revenue: 32791000000 },
+    ],
   },
 ];
