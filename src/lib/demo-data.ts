@@ -384,5 +384,21 @@ export const demoStartups: Startup[] = [
       { periodEnd: "2024-12-31", revenue: 28167000000 },
       { periodEnd: "2025-12-31", revenue: 32791000000 },
     ],
+  },,
+  {
+    id: "jpmorgan-chase",
+    slug: "jpmorgan-chase",
+    name: "JPMorgan Chase & Co. (JPM)",
+    sector: "Financial Services",
+    geography: "United States",
+    stage: "GROWTH",
+    businessModel: "Banking, markets and financial services",
+    description: "SEC-reporting public company; financial periods use reported annual total net revenue.",
+    dataSource: "sec_xbrl",
+    sourceNote: "SEC Form 10-K reported figures; years ended December 31, 2025 and December 31, 2024. Total net revenue values are USD millions. CIK 0000019617.",
+    financials: [
+      { periodEnd: "2024-12-31", revenue: 177556000000 },
+      { periodEnd: "2025-12-31", revenue: 182447000000 },
+    ],
   },
 ];
