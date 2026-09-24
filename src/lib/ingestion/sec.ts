@@ -40,7 +40,7 @@ async function secJson<T>(url: string): Promise<T> {
   if (!userAgent) throw new Error("SEC_USER_AGENT is required for SEC ingestion.");
   const response = await fetch(url, {
     headers: { Accept: "application/json", "User-Agent": userAgent },
-    cache: "no-store",
+    next: { revalidate: 60 },
   });
   if (!response.ok) throw new Error(`SEC request failed: ${response.status} ${response.statusText}`);
   return response.json() as Promise<T>;
