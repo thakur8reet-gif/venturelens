@@ -43,13 +43,19 @@ export async function GET(request: Request) {
       },
     });
 
-    return NextResponse.json({ ok: true, provider: "SEC", tickers, companiesFound: companies.length, ...result });
+    return NextResponse.json(
+      { ok: true, provider: "SEC", tickers, companiesFound: companies.length, ...result },
+      { headers: { "Cache-Control": "no-store" } },
+    );
   } catch (error) {
     const message = error instanceof Error ? error.message : "Unknown ingestion error";
     await prisma.ingestionJob.update({
       where: { id: job.id },
       data: { status: "FAILED", finishedAt: new Date(), error: message },
     });
-    return NextResponse.json({ ok: false, provider: "SEC", error: message }, { status: 500 });
+    return NextResponse.json(
+      { ok: false, provider: "SEC", error: "SEC ingestion failed." },
+      { status: 500, headers: { "Cache-Control": "no-store" } },
+    );
   }
 }
