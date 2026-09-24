@@ -42,7 +42,7 @@ export default async function Home() {
     </section>
 
     <section className="grid">
-      <div className="card kpi-card"><div className="kpi-top"><span className="kpi-index">01</span><span className="kpi-label">Demo universe</span></div><div className="card"><h2>Demo companies</h2><div className="metric">{demoStartups.length}</div><div className="muted">Synthetic data — clearly labelled</div></div>
+      <div className="card kpi-card"><div className="kpi-top"><span className="kpi-index">01</span><span className="kpi-label">Demo universe</span></div><h2>Demo companies</h2><div className="metric">{demoStartups.length}</div><div className="muted">Synthetic data — clearly labelled</div></div>
       <div className="card"><h2>Mandate-compatible candidates</h2><div className="metric">{review}</div><div className="muted">{demoFund.name}</div></div>
       <div className="card"><h2>Live SEC universe</h2><div className="metric">{secCompanies.length}</div><div className="muted">Public-company XBRL facts</div></div>
 
