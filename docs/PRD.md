@@ -127,3 +127,42 @@ The current product phase is successful when:
 ## 11. Future product areas
 
 Potential future phases include additional data providers, richer company comparison, stronger diligence workflows, portfolio-level analysis, and deeper research/AI assistance. These should be added only with explicit provenance and evidence policies.
+
+## 11. Product roadmap
+
+### Phase 1 — Evidence foundation
+
+- SEC EDGAR/XBRL ingestion
+- Structured financial periods
+- Evidence classification
+- Provenance and missing-data handling
+- Live company discovery and detail views
+
+### Phase 2 — Diligence intelligence
+
+- Cross-company comparison
+- Historical trend analysis
+- Expanded operating metrics
+- Evidence-backed diligence summaries
+- More robust data-quality diagnostics
+
+### Phase 3 — Research platform
+
+- Additional authoritative data providers
+- Portfolio-level views
+- Research workflows and saved analyses
+- Deeper AI-assisted research with source-grounded outputs
+
+## 12. Acceptance criteria
+
+A release satisfies this PRD when the core workflow can be completed without relying on fabricated live-company financial data:
+
+1. A configured SEC company can be discovered.
+2. Its detail page loads the company's SEC facts.
+3. Reported values are distinguishable from derived values.
+4. Source provenance is available for reported inputs.
+5. Missing facts remain unavailable.
+6. Synthetic demo fixtures remain clearly labeled.
+7. Automated tests and the production build pass.
+8. A failed external data provider produces a controlled failure rather than silently switching data sources.
+
