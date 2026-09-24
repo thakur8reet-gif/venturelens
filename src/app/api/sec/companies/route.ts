@@ -12,15 +12,20 @@ export async function GET() {
 
   try {
     const companies = await discoverSecCompanies(tickers);
-    return NextResponse.json({
-      provider: "SEC EDGAR",
-      dataType: "public_company_financials",
-      tickers,
-      companies,
-      retrievedAt: new Date().toISOString(),
-    });
-  } catch (error) {
-    const message = error instanceof Error ? error.message : "SEC request failed";
-    return NextResponse.json({ error: message }, { status: 503 });
+    return NextResponse.json(
+      {
+        provider: "SEC EDGAR",
+        dataType: "public_company_financials",
+        tickers,
+        companies,
+        retrievedAt: new Date().toISOString(),
+      },
+      { headers: { "Cache-Control": "no-store" } },
+    );
+  } catch {
+    return NextResponse.json(
+      { error: "SEC data is temporarily unavailable." },
+      { status: 503, headers: { "Cache-Control": "no-store" } },
+    );
   }
 }
