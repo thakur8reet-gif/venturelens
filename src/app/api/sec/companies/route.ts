@@ -5,7 +5,7 @@ export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
 
 export async function GET() {
-  const tickers = (process.env.SEC_TICKERS ?? "AAPL,MSFT,NVDA,GOOGL")
+  const tickers = (process.env.SEC_TICKERS ?? "AAPL,MSFT,NVDA,GOOGL,AMZN")
     .split(",")
     .map(value => value.trim().toUpperCase())
     .filter(Boolean);
